@@ -125,7 +125,7 @@ const addToShardedDirectory = async (context, options) => {
     shard, path
   } = await addFileToShardedDirectory(context, options)
 
-  const result = await last(shard.flush('', context.block))
+  const result = await last(shard.flush(context.block))
   const node = await context.ipld.get(result.cid)
 
   // we have written out the shard, but only one sub-shard will have been written so replace it in the original shard

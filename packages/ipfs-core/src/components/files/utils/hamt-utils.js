@@ -216,7 +216,7 @@ const createShard = async (context, contents, options) => {
     })
   }
 
-  return last(shard.flush('', context.block))
+  return last(shard.flush(context.block))
 }
 
 module.exports = {

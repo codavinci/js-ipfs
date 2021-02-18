@@ -16,7 +16,7 @@
     "cids": "^1.1.5",
     "ipfs": "^0.54.2",
     "ipld-block": "^0.11.0",
-    "ipld-dag-pb": "ipld/js-ipld-dag-pb#feat/add-types",
+    "ipld-dag-pb": "^0.21.0",
     "ipld-git": "^0.6.1",
     "ipld-ethereum": "^5.0.1",
     "multihashing-async": "^2.0.1"
