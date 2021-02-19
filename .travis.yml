@@ -75,211 +75,253 @@ jobs:
   include:
     - stage: test
       name: lint
+      node_js: 'node'
       script:
         - npm run lint -- $RUN_SINCE --concurrency 1
 
     - stage: test
       name: dep-check (production deps)
+      node_js: 'node'
       script:
         - npm run dep-check -- $RUN_SINCE -- -- -p
 
     - stage: test
       name: dep-check (unused deps)
+      node_js: 'node'
       script:
         - npm run dep-check -- $RUN_SINCE -- -- -- --unused
 
     - stage: test
       name: chrome
+      node_js: 'node'
       script:
         - npm run test:browser -- $RUN_SINCE -- -- --bail
 
     - stage: test
       name: chrome webworker
+      node_js: 'node'
       script:
         - npm run test:webworker -- $RUN_SINCE -- -- --bail --timeout 60000
 
     - stage: test
       name: firefox
+      node_js: 'node'
       script:
         - npm run test:browser -- $RUN_SINCE -- -- --bail --browsers FirefoxHeadless
 
     - stage: test
       name: firefox webworker
+      node_js: 'node'
       script:
         - npm run test:webworker -- $RUN_SINCE -- -- --bail --browsers FirefoxHeadless --timeout 60000
 
     - stage: test
       name: electron-main
+      node_js: 'node'
       script:
         - npm run test:electron-main -- $RUN_SINCE -- -- --bail --timeout 60000
 
     - stage: test
       name: electron-renderer
+      node_js: 'node'
       script:
         - npm run test:electron-renderer -- $RUN_SINCE -- -- --bail --timeout 60000
 
     - stage: test
       name: interop - node
+      node_js: 'node'
       script:
         - npm run test:interop -- $RUN_SINCE -- -- -- -t node --bail
 
     - stage: test
       name: interop - browser
+      node_js: 'node'
       script:
         - npm run test:interop -- $RUN_SINCE -- -- -- -t browser --bail
 
     - stage: test
       name: interop - electron-main
+      node_js: 'node'
       script:
         - npm run test:interop -- $RUN_SINCE -- -- -- -t electron-main -f ./test/node.js --bail --timeout 60000
 
     - stage: test
       name: interop - electron-renderer
+      node_js: 'node'
       script:
         - npm run test:interop -- $RUN_SINCE -- -- -- -t electron-renderer -f ./test/browser.js -bail --timeout 60000
 
     - stage: test
       name: js-ipfs interface tests - node
+      node_js: 'node'
       script:
         - npm run test:interface:core -- $RUN_SINCE -- -- --bail -t node
 
     - stage: test
       name: js-ipfs interface tests - chrome
+      node_js: 'node'
       script:
         - npm run test:interface:core -- $RUN_SINCE -- -- --bail -t browser
 
     - stage: test
       name: js-ipfs interface tests - chrome webworker
+      node_js: 'node'
       script:
         - npm run test:interface:core -- $RUN_SINCE -- -- --bail -t webworker --timeout 60000
 
     - stage: test
       name: js-ipfs interface tests - firefox
+      node_js: 'node'
       script:
         - npm run test:interface:core -- $RUN_SINCE -- -- --bail -t browser --browsers FirefoxHeadless
 
     - stage: test
       name: js-ipfs interface tests - firefox webworker
+      node_js: 'node'
       script:
         - npm run test:interface:core -- $RUN_SINCE -- -- --bail -t webworker --browsers FirefoxHeadless --timeout 60000
 
     - stage: test
       name: js-ipfs interface tests - electron main
+      node_js: 'node'
       script:
         - npm run test:interface:core -- $RUN_SINCE -- -- --bail -t electron-main --timeout 60000
 
     - stage: test
       name: js-ipfs interface tests - electron renderer
+      node_js: 'node'
       script:
         - npm run test:interface:core -- $RUN_SINCE -- -- --bail -t electron-renderer --timeout 60000
 
     - stage: test
       name: js-ipfs interface tests - ipfs-client - node
+      node_js: 'node'
       script:
         - npm run test:interface:client -- $RUN_SINCE -- -- --bail -t node
 
     - stage: test
       name: js-ipfs interface tests - ipfs-client - chrome
+      node_js: 'node'
       script:
         - npm run test:interface:client -- $RUN_SINCE -- -- --bail -t browser
 
     - stage: test
       name: js-ipfs interface tests - ipfs-client - chrome webworker
+      node_js: 'node'
       script:
         - npm run test:interface:client -- $RUN_SINCE -- -- --bail -t webworker --timeout 60000
 
     - stage: test
       name: js-ipfs interface tests - ipfs-client - firefox
+      node_js: 'node'
       script:
         - npm run test:interface:client -- $RUN_SINCE -- -- --bail -t browser --browsers FirefoxHeadless
 
     - stage: test
       name: js-ipfs interface tests - ipfs-client - firefox webworker
+      node_js: 'node'
       script:
         - npm run test:interface:client -- $RUN_SINCE -- -- --bail -t webworker --browsers FirefoxHeadless --timeout 60000
 
     - stage: test
       name: js-ipfs interface tests - ipfs-client - electron main
+      node_js: 'node'
       script:
         - npm run test:interface:client -- $RUN_SINCE -- -- --bail -t electron-main --timeout 60000
 
     - stage: test
       name: js-ipfs interface tests - ipfs-client - electron renderer
+      node_js: 'node'
       script:
         - npm run test:interface:client -- $RUN_SINCE -- -- --bail -t electron-renderer --timeout 60000
 
     - stage: test
       name: http-api-client interface tests vs go-ipfs - node
+      node_js: 'node'
       script:
         - npm run test:interface:http-go -- $RUN_SINCE -- -- --bail -t node
 
     - stage: test
       name: http-api-client interface tests vs go-ipfs - chrome
+      node_js: 'node'
       script:
         - npm run test:interface:http-go -- $RUN_SINCE -- -- --bail -t browser
 
     - stage: test
       name: http-api-client interface tests vs go-ipfs - chrome webworker
+      node_js: 'node'
       script:
         - npm run test:interface:http-go -- $RUN_SINCE -- -- --bail -t webworker --timeout 60000
 
     - stage: test
       name: http-api-client interface tests vs go-ipfs - firefox
+      node_js: 'node'
       script:
         - npm run test:interface:http-go -- $RUN_SINCE -- -- --bail -t browser --browsers FirefoxHeadless
 
     - stage: test
       name: http-api-client interface tests vs go-ipfs - firefox webworker
+      node_js: 'node'
       script:
         - npm run test:interface:http-go -- $RUN_SINCE -- -- --bail -t webworker --browsers FirefoxHeadless --timeout 60000
 
     - stage: test
       name: http-api-client interface tests vs js-ipfs - node
+      node_js: 'node'
       script:
         - npm run test:interface:http-js -- $RUN_SINCE -- -- --bail -t node
 
     - stage: test
       name: http-api-client interface tests vs js-ipfs - chrome
+      node_js: 'node'
       script:
         - npm run test:interface:http-js -- $RUN_SINCE -- -- --bail -t browser
 
     - stage: test
       name: http-api-client interface tests vs js-ipfs - chrome webworker
+      node_js: 'node'
       script:
         - npm run test:interface:http-js -- $RUN_SINCE -- -- --bail -t webworker --timeout 60000
 
     - stage: test
       name: http-api-client interface tests vs js-ipfs - firefox
+      node_js: 'node'
       script:
         - npm run test:interface:http-js -- $RUN_SINCE -- -- --bail -t browser --browsers FirefoxHeadless
 
     - stage: test
       name: http-api-client interface tests vs js-ipfs - firefox webworker
+      node_js: 'node'
       script:
         - npm run test:interface:http-js -- $RUN_SINCE -- -- --bail -t webworker --browsers FirefoxHeadless --timeout 60000
 
     - stage: test
       name: http-api-client interface tests vs js-ipfs - electron main
+      node_js: 'node'
       script:
         - npm run test:interface:http-js -- $RUN_SINCE -- -- --bail -t electron-main --timeout 60000
 
     - stage: test
       name: http-api-client interface tests vs js-ipfs - electron renderer
+      node_js: 'node'
       script:
         - npm run test:interface:http-js -- $RUN_SINCE -- -- --bail -t electron-renderer --timeout 60000
 
     - stage: test
       name: ipfs-message-port-client interface tests - chrome
+      node_js: 'node'
       script:
         - npm run test:interface:message-port-client -- $RUN_SINCE -- -- --bail -t browser
 
     - stage: test
       name: ipfs-message-port-client interface tests - firefox
+      node_js: 'node'
       script:
         - npm run test:interface:message-port-client -- $RUN_SINCE -- -- --bail -t browser --browsers FirefoxHeadless
 
     - stage: test
       name: examples
+      node_js: 'node'
       script:
         # Travis lets scripts continue even if previous steps fail so need to use &&: https://github.com/travis-ci/travis-ci/issues/1066
         - npm run configure-examples &&
@@ -289,6 +331,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: release rc
+      node_js: 'node'
       script:
         # travis does not fetch the whole repo history, but we need that to work out the
         # ref count to publish canary releases properly
@@ -302,6 +345,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: release docker
+      node_js: 'node'
       script:
         # travis does not fetch the whole repo history, but we need that to work out the
         # ref count to publish canary releases properly
@@ -315,6 +359,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: external - ipfs-webui
+      node_js: 'node'
       script:
         - E2E_IPFSD_TYPE=js npm run test:external -- -- -- https://github.com/ipfs-shipyard/ipfs-webui.git --deps=ipfs@next
 
@@ -322,6 +367,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: external - ipfs-companion
+      node_js: 'node'
       script:
         - npm run test:external -- -- -- https://github.com/ipfs-shipyard/ipfs-companion.git --deps=ipfs@next
 
@@ -329,6 +375,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: external - npm-on-ipfs
+      node_js: 'node'
       script:
         - npm run test:external -- -- -- https://github.com/ipfs-shipyard/npm-on-ipfs.git --deps=ipfs@next
 
@@ -336,6 +383,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: external - peer-base
+      node_js: 'node'
       script:
         - npm run test:external -- -- -- https://github.com/achingbrain/peer-base.git --branch upgrade-to-latest-ipfs-rc --deps=ipfs@next
 
@@ -343,6 +391,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: external - service-worker-gateway
+      node_js: 'node'
       script:
         - npm run test:external -- -- -- https://github.com/ipfs-shipyard/service-worker-gateway.git --deps=ipfs@next
 
@@ -350,6 +399,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: external - orbit-db
+      node_js: 'node'
       script:
         - npm run test:external -- -- -- https://github.com/orbitdb/orbit-db.git --deps=ipfs@next
 
@@ -357,6 +407,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: external - ipfs-log
+      node_js: 'node'
       script:
         - npm run test:external -- -- -- https://github.com/orbitdb/ipfs-log.git --deps=ipfs@next
 
@@ -364,6 +415,7 @@ jobs:
       # only run on changes to master
       if: branch = master AND type = push AND fork = false
       name: external - sidetree
+      node_js: 'node'
       script:
         - npm run test:external -- -- -- https://github.com/decentralized-identity/sidetree.git --deps=ipfs@next
 
