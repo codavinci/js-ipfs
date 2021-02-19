@@ -210,9 +210,13 @@ module.exports = (context) => {
           dagBuilder: async function * (source, block, opts) {
             for await (const entry of source) {
               yield async function () {
-                const buf = entry.content.serialize()
+                /** @type {DAGNode} */
+                // @ts-ignore
+                const node = entry.content
+
+                const buf = node.serialize()
                 const cid = await persist(buf, block, opts)
-                const unixfs = UnixFS.unmarshal(entry.content.Data)
+                const unixfs = UnixFS.unmarshal(node.Data)
 
                 return {
                   cid,
@@ -226,6 +230,10 @@ module.exports = (context) => {
         }),
         (nodes) => last(nodes)
       )
+
+      if (!root) {
+        throw errCode(new Error(`Could not chmod ${path}`), 'ERR_COULD_NOT_CHMOD')
+      }
 
       // remove old path from mfs
       await rm(context)(path, opts)

@@ -99,7 +99,13 @@ const addToDirectory = async (context, options) => {
 
   if (node.mtime) {
     // Update mtime if previously set
-    node.mtime = new Date()
+    const ms = Date.now()
+    const secs = Math.floor(ms / 1000)
+
+    node.mtime = {
+      secs: secs,
+      nsecs: (ms - (secs * 1000)) * 1000
+    }
 
     options.parent = new DAGNode(node.marshal(), options.parent.Links)
   }

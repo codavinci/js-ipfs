@@ -229,6 +229,10 @@ const write = async (context, source, destination, options) => {
     pin: false
   }))
 
+  if (!result) {
+    throw errCode(new Error(`cannot write to ${parent.name}`), 'ERR_COULD_NOT_WRITE')
+  }
+
   log(`Wrote ${result.cid}`)
 
   return {
