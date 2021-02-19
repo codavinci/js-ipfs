@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "JavaScript implementation of the IPFS specification",
   "scripts": {
-    "postinstall": "lerna bootstrap",
     "link": "lerna link",
     "reset": "lerna run clean && rimraf packages/*/node_modules node_modules",
     "test": "lerna run test",
@@ -63,6 +62,12 @@
     "url": "git+https://github.com/ipfs/js-ipfs.git"
   },
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "npm": ">=7.0.0"
+  },
   "contributors": [
     "David Dias <daviddias.p@gmail.com>",
     "achingbrain <alex@achingbrain.net>",
