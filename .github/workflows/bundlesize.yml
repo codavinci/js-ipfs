@@ -30,8 +30,9 @@ jobs:
         with:
           path: node_modules
           key: ${{ matrix.node-version }}-${{ runner.OS }}-build-${{ hashFiles('package.json') }}
-      - name: Install dependencies
+      - name: Install pre-gyp
         run: npm install -g node-pre-gyp
+      - name: Install dependencies
         run: npm install
       - name: Bundlesize ${{ matrix.project }}
         uses: ipfs/aegir/actions/bundle-size@v29.0.0
