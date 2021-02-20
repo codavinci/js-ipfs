@@ -49,7 +49,7 @@ module.exports = (common, options) => {
       })
 
       const stat = await ipfs.files.stat(testPath)
-      expect(stat).to.have.property('mtime', undefined)
+      expect(stat).to.not.have.property('mtime')
 
       await ipfs.files.touch(testPath)
 

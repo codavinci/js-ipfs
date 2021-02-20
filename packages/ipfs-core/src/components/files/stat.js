@@ -81,7 +81,8 @@ const statters = {
    * @returns {Stat}
    */
   file: (file) => {
-    return {
+    /** @type {Stat} */
+    const stat = {
       cid: file.cid,
       type: 'file',
       size: file.unixfs.fileSize(),
@@ -90,16 +91,22 @@ const statters = {
       local: undefined,
       sizeLocal: undefined,
       withLocality: false,
-      mode: file.unixfs.mode,
-      mtime: file.unixfs.mtime
+      mode: file.unixfs.mode
     }
+
+    if (file.unixfs.mtime) {
+      stat.mtime = file.unixfs.mtime
+    }
+
+    return stat
   },
   /**
    * @param {import('ipfs-unixfs-exporter').UnixFSDirectory} file
    * @returns {Stat}
    */
   directory: (file) => {
-    return {
+    /** @type {Stat} */
+    const stat = {
       cid: file.cid,
       type: 'directory',
       size: 0,
@@ -108,9 +115,14 @@ const statters = {
       local: undefined,
       sizeLocal: undefined,
       withLocality: false,
-      mode: file.unixfs.mode,
-      mtime: file.unixfs.mtime
+      mode: file.unixfs.mode
     }
+
+    if (file.unixfs.mtime) {
+      stat.mtime = file.unixfs.mtime
+    }
+
+    return stat
   },
   /**
    * @param {import('ipfs-unixfs-exporter').ObjectNode} file
