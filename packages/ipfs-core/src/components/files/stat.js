@@ -48,11 +48,11 @@ module.exports = (context) => {
       throw err
     }
 
-    if (!statters[file.cid.codec]) {
+    if (!statters[file.type]) {
       throw new Error(`Cannot stat codec ${file.cid.codec}`)
     }
 
-    return statters[file.cid.codec](file)
+    return statters[file.type](file)
   }
 
   return withTimeoutOption(mfsStat)
@@ -61,7 +61,7 @@ module.exports = (context) => {
 /** @type {Record<string, (file:any) => Stat>} */
 const statters = {
   /**
-   * @param {any} file
+   * @param {import('ipfs-unixfs-exporter').RawNode} file
    * @returns {Stat}
    */
   raw: (file) => {
@@ -77,59 +77,46 @@ const statters = {
     }
   },
   /**
-   * @param {any} file
+   * @param {import('ipfs-unixfs-exporter').UnixFSFile} file
    * @returns {Stat}
    */
-  'dag-pb': (file) => {
-    const blocks = file.node.Links.length
-    const size = file.node.size
-    const cumulativeSize = file.node.size
-
-    /** @type {Stat} */
-    const output = {
+  file: (file) => {
+    return {
       cid: file.cid,
       type: 'file',
-      size: size,
-      cumulativeSize: cumulativeSize,
-      blocks: blocks,
+      size: file.unixfs.fileSize(),
+      cumulativeSize: file.node.size,
+      blocks: file.unixfs.blockSizes.length,
       local: undefined,
       sizeLocal: undefined,
-      withLocality: false
+      withLocality: false,
+      mode: file.unixfs.mode,
+      mtime: file.unixfs.mtime
     }
-
-    if (file.unixfs) {
-      output.size = file.unixfs.fileSize()
-
-      // for go-ipfs compatibility
-      if (file.unixfs.type === 'hamt-sharded-directory') {
-        output.type = 'directory'
-      } else {
-        output.type = file.unixfs.type
-      }
-
-      output.mode = file.unixfs.mode
-
-      if (file.unixfs.isDirectory()) {
-        output.size = 0
-        output.cumulativeSize = file.node.size
-      }
-
-      if (output.type === 'file') {
-        output.blocks = file.unixfs.blockSizes.length
-      }
-
-      if (file.unixfs.mtime) {
-        output.mtime = file.unixfs.mtime
-      }
-    }
-
-    return output
   },
   /**
-   * @param {any} file
+   * @param {import('ipfs-unixfs-exporter').UnixFSDirectory} file
    * @returns {Stat}
    */
-  'dag-cbor': (file) => {
+  directory: (file) => {
+    return {
+      cid: file.cid,
+      type: 'directory',
+      size: 0,
+      cumulativeSize: file.node.size,
+      blocks: file.node.Links.length,
+      local: undefined,
+      sizeLocal: undefined,
+      withLocality: false,
+      mode: file.unixfs.mode,
+      mtime: file.unixfs.mtime
+    }
+  },
+  /**
+   * @param {import('ipfs-unixfs-exporter').ObjectNode} file
+   * @returns {Stat}
+   */
+  object: (file) => {
     // @ts-ignore - This is incompatible with Stat object
     // @TODO - https://github.com/ipfs/js-ipfs/issues/3325
     return {
@@ -140,14 +127,14 @@ const statters = {
     }
   },
   /**
-   * @param {any} file
+   * @param {import('ipfs-unixfs-exporter').IdentityNode} file
    * @returns {Stat}
    */
   identity: (file) => {
     return {
       cid: file.cid,
-      size: file.unixfs.data.length,
-      cumulativeSize: file.unixfs.data.length,
+      size: file.node.length,
+      cumulativeSize: file.node.length,
       blocks: 0,
       type: 'file', // for go compatibility
       local: undefined,
