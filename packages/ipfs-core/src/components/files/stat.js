@@ -117,10 +117,12 @@ const statters = {
    * @returns {Stat}
    */
   object: (file) => {
-    // @ts-ignore - This is incompatible with Stat object
-    // @TODO - https://github.com/ipfs/js-ipfs/issues/3325
     return {
       cid: file.cid,
+      size: file.node.length,
+      cumulativeSize: file.node.length,
+      type: 'file', // for go compatibility
+      blocks: 0,
       local: undefined,
       sizeLocal: undefined,
       withLocality: false
