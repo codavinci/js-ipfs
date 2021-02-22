@@ -25,7 +25,7 @@
     "clean": "lerna run clean",
     "lint": "lerna run lint",
     "dep-check": "lerna run dep-check",
-    "configure-examples": "run-s configure-examples:* release:pre:reinstall build",
+    "configure-examples": "npx npm-run-all configure-examples:* release:pre:reinstall build",
     "configure-examples:add-examples-lerna": "json -I -f ./lerna.json -e \"this.packages.push('examples/*'); this.packages = [...new Set(this.packages)]\"",
     "configure-examples:add-examples-npm": "json -I -f ./package.json -e \"this.workspaces.push('examples/*'); this.workspaces = [...new Set(this.workspaces)]\"",
     "release": "run-s release:pre:* release:publish docker:release release:post:*",
