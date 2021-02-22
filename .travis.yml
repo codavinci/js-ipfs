@@ -323,10 +323,10 @@ jobs:
       name: examples
       node_js: 'node'
       install:
+        - npm config set loglevel debug
         - npm run configure-examples:add-examples-lerna
         - npm run configure-examples:add-examples-npm
         - npm install
-        - npm run prepare
         - npm run build
       script: npm run test -- --scope=example* --concurrency=1
 
