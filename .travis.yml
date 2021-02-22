@@ -325,7 +325,6 @@ jobs:
       cache:
         npm: false
       install:
-        - npm config set loglevel info
         - npm run configure-examples:add-examples-lerna
         - npm run configure-examples:add-examples-npm
         - npm install
