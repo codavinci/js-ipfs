@@ -1,7 +1,7 @@
 'use strict'
 
 const { ephemeralPort } = require('./utils')
-const path = require('path')
+// @ts-ignore
 const chrome = require('chromedriver') // added to work on windows
 
 const WEBRIVER_PORT = ephemeralPort()
@@ -24,7 +24,7 @@ module.exports = {
       desiredCapabilities: {
         browserName: 'chrome',
         chromeOptions: {
-          args: ['headless']
+          //args: ['headless']
         }
       }
     }
