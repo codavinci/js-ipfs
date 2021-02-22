@@ -322,6 +322,8 @@ jobs:
     - stage: test
       name: examples
       node_js: 'node'
+      cache:
+        npm: false
       install:
         - npm config set loglevel debug
         - npm run configure-examples:add-examples-lerna
