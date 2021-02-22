@@ -326,6 +326,7 @@ jobs:
         - npm run configure-examples:add-examples-lerna
         - npm run configure-examples:add-examples-npm
         - npm install
+        - npm run build
       script: npm run test -- --scope=example* --concurrency=1
 
     - stage: release-rc
