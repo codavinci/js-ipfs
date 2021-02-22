@@ -322,7 +322,10 @@ jobs:
     - stage: test
       name: examples
       node_js: 'node'
-      install: npm run configure-examples
+      install:
+        - npm run configure-examples:add-examples-lerna
+        - npm run configure-examples:add-examples-npm
+        - npm install
       script: npm run test -- --scope=example* --concurrency=1
 
     - stage: release-rc
