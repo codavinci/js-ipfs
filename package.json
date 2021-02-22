@@ -22,7 +22,6 @@
     "test:interface:message-port-client": "lerna run test:interface:message-port-client",
     "coverage": "lerna run coverage",
     "build": "lerna run prepublishOnly",
-    "prepare": "lerna run prepare",
     "clean": "lerna run clean",
     "lint": "lerna run lint",
     "dep-check": "lerna run dep-check",
